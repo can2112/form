@@ -53,8 +53,6 @@ export default function Home() {
   }, [screen]);
   return (
     <main>
-      <p>this is a new next app</p>
-
       <div className=" flex justify-center items-center h-screen">
         {screen === "mobile" && (
           <div className="w-1/3 bg-gray-400 flex flex-col py-3 gap-2 rounded px-2 relative">
@@ -187,13 +185,7 @@ export default function Home() {
                   phone: phone,
                   otp: otp,
                 });
-                alert(
-                  selfie,
-                  name,
-                   startDate,
-                phone,
-                   otp,
-                );
+                alert(selfie, name, startDate, phone, otp);
               }}
             >
               Submit
