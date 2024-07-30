@@ -51,17 +51,19 @@ export default function Home() {
     <main>
       <div className=" flex justify-center items-center h-screen">
         {screen === "mobile" && (
-          <div className="w-1/3 bg-white flex   rounded  relative">
-            <Image
-              src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
-              }
-              alt="fja"
-              width={100}
-              height={100}
-              className="w-full h-full"
-            />
-            <div className=" flex flex-col px-2 py-4 ">
+          <div className=" w-[90%]  md:w-1/2 !bg-white flex flex-col md:flex-row    rounded  relative justify-between">
+            <div className="md:w-1/2 w-full p-0">
+              <Image
+                src={
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
+                }
+                alt="fja"
+                width={100}
+                height={100}
+                className=" w-full h-full"
+              />
+            </div>
+            <div className=" flex flex-col md:w-1/2 w-full py-8 px-2 h-40   ">
               <input
                 placeholder="Mobile"
                 type="phone"
@@ -69,7 +71,7 @@ export default function Home() {
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
-                className="text-black bg-gray-300 rounded px-1 py-3 "
+                className="text-black bg-gray-300 rounded px-1 py-2 "
               />
               <p className="text-red-500 absolute top-16 ">{mobileErr}</p>
               <button
@@ -88,17 +90,19 @@ export default function Home() {
         )}
 
         {screen === "otp" && (
-          <div className="w-1/2 bg-white flex  gap-4 rounded ">
-            <Image
-              src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
-              }
-              alt="fja"
-              width={100}
-              height={100}
-              className="w-full h-full"
-            />
-            <div className="flex flex-col w-full py-4 h-full justify-center px-3 text-black">
+          <div className=" w-[90%]  md:w-1/2 bg-white flex flex-col md:flex-row    rounded   justify-between">
+            <div className="md:w-1/2 w-full p-0">
+              <Image
+                src={
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
+                }
+                alt="fja"
+                width={100}
+                height={100}
+                className=" w-full h-full"
+              />
+            </div>
+            <div className="flex flex-col w-1/2 py-4 h-full justify-center px-3 text-black">
               <label className="px-1">OTP</label>
               <input
                 placeholder="Mobile"
@@ -123,35 +127,34 @@ export default function Home() {
         )}
 
         {screen === "personal" && (
-          <div className=" flex justify-between w-1/2">
-            <Image
-              src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
-              }
-              alt="fja"
-              width={100}
-              height={100}
-              className="w-full h-full"
-            />
-            <div className="bg-white flex flex-col py-3 gap-4 rounded px-2">
+          <div className="w-[90%]  md:w-1/2 bg-white flex flex-col md:flex-row    rounded   justify-between">
+            <div className="md:w-1/2 w-full p-0">
+              <Image
+                src={
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
+                }
+                alt="fja"
+                width={100}
+                height={100}
+                className=" w-full h-full"
+              />
+            </div>
+            <div className="bg-white w-1/2 flex flex-col py-3 gap-4 rounded px-2">
               {!selfie && (
                 <div>
-                  <div>
-                    <video
-                      ref={videoRef}
-                      width="320"
-                      height="240"
-                      autoPlay
-                      className="w-full"
-                    ></video>
-                    <canvas
-                      ref={canvasRef}
-                      width="320"
-                      height="240"
-                      style={{ display: "none" }}
-                      className="w-full"
-                    ></canvas>
-                  </div>
+                  <video
+                    ref={videoRef}
+                    width="320"
+                    height="240"
+                    autoPlay
+                    className="w-full"
+                  ></video>
+                  <canvas
+                    ref={canvasRef}
+                    width="320"
+                    height="240"
+                    style={{ display: "none" }}
+                  ></canvas>
 
                   <button
                     type="button"
@@ -166,46 +169,47 @@ export default function Home() {
 
               {selfie && (
                 <div>
-                  <img src={selfie} alt="Selfie" className="w-full " />
-
+                  <img src={selfie} alt="Selfie" className="w-full h-full" />
                   <p className="text-red-500">{selfieErr}</p>
                 </div>
               )}
 
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                dateFormat="yyyy/MM/dd"
-                className="w-full p-2 rounded-md text-black border border-blue-100"
-                placeholderText="Select a date"
-              />
-              <input
-                type="text"
-                value={name}
-                className="text-black p-2 rounded-md w-full border border-blue-100"
-                placeholder="Full name"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="bg-blue-500 p-2 w-full mt-4 rounded-md"
-                onClick={() => {
-                  if (!selfie) {
-                    return setSelfieErr("Please capture selfie");
-                  }
-                  console.log({
-                    selfie: selfie,
-                    name: name,
-                    date: startDate,
-                    phone: phone,
-                    otp: otp,
-                  });
-                  alert(name, startDate, phone, otp);
-                  setScreen("submitted");
-                }}
-              >
-                Submit
-              </button>
+              <div className=" flex flex-col w-full h-full">
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  dateFormat="yyyy/MM/dd"
+                  className="w-full p-2 rounded-md text-black border border-blue-100"
+                  placeholderText="Select a date"
+                />
+                <input
+                  type="text"
+                  value={name}
+                  className="text-black p-2 rounded-md w-full border border-blue-100"
+                  placeholder="Full name"
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-500 p-2 w-full mt-4 rounded-md"
+                  onClick={() => {
+                    if (!selfie) {
+                      return setSelfieErr("Please capture selfie");
+                    }
+                    console.log({
+                      selfie: selfie,
+                      name: name,
+                      date: startDate,
+                      phone: phone,
+                      otp: otp,
+                    });
+                    alert(name, startDate, phone, otp);
+                    setScreen("submitted");
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
         )}
