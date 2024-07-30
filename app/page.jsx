@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Home() {
   const [phone, setPhone] = useState("");
   const [screen, setScreen] = useState("mobile");
-  const [otp, setOtp] = useState(1234);
+  const [otp, setOtp] = useState("");
   const [mobileErr, setMobileErr] = useState("");
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -19,7 +19,16 @@ export default function Home() {
   const [name, setName] = useState("");
 
   const requestOtp = (number) => {
-    nextClient.post("/request-otp", number);
+    nextClient.post("/request-otp", {number});
+  };
+
+  const verifyOtp = async (number, otp) => {
+    const res = await nextClient.post("/verify-otp", {number, otp});
+    console.log(res);
+    console.log(res.status);
+    if(res.status === 200){
+      setScreen("personal");
+    }
   };
 
   const startCamera = async () => {
@@ -56,7 +65,7 @@ export default function Home() {
     <main>
       <div className=" flex justify-center items-center h-screen">
         {screen === "mobile" && (
-          <div className=" w-[90%]  md:w-1/2 !bg-white h-[65%] flex flex-col md:flex-row    rounded  relative justify-between">
+          <div className=" w-[90%]  md:w-1/2 !bg-white h-[65%] flex flex-col md:flex-row rounded relative justify-between">
             <div className="md:w-1/2 w-full p-0">
               <Image
                 src={
@@ -69,7 +78,7 @@ export default function Home() {
               />
             </div>
             <div className="flex flex-col md:w-1/2 md:justify-center md:items-between w-full py-1 px-2">
-            <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-black">Coffee Brewery</h1>
+            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-black">Coffee Brewery</h1>
               <input
                 placeholder="Mobile"
                 type="phone"
@@ -104,27 +113,28 @@ export default function Home() {
                   "https://as1.ftcdn.net/v2/jpg/03/15/40/34/1000_F_315403482_MVo1gSOOfvwCwhLZ9hfVSB4MZuQilNrx.jpg"
                 }
                 alt="fja"
-                width={100}
-                height={100}
+                width={700}
+                height={700}
                 className=" w-full h-full"
               />
             </div>
             <div className="flex flex-col w-1/2 py-4 h-full justify-center px-3 text-black">
-              <label className="px-1">OTP</label>
+              <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-black">Coffee Brewery</h1>
               <input
-                placeholder="Mobile"
+                placeholder="OTP"
                 type="number"
                 value={otp}
                 onChange={(e) => {
-                  setPhone(e.target.value);
+                  setOtp(e.target.value);
                 }}
-                className="text-black bg-gray-300 rounded px-1 py-3 border border-blue-100"
+                className="text-black border-2 border-slate-200 rounded px-1 py-2"
               />
 
               <button
-                className="text-white bg-blue-500 mt-5  px-2 py-2 rounded"
+                className="text-white bg-blue-600 mt-5  px-2 py-2 rounded"
                 onClick={() => {
-                  setScreen("personal");
+                  // setScreen("personal");
+                  verifyOtp(phone, otp);
                 }}
               >
                 Submit
@@ -181,13 +191,6 @@ export default function Home() {
               )}
               <div className=" flex flex-col gap-3 w-full h-full relative top-0">
                 <p className="text-red-500 absolute top-24">{selfieErr}</p>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  dateFormat="yyyy/MM/dd"
-                  className="w-full p-2 rounded-md text-black border border-blue-100"
-                  placeholderText="Select a date"
-                />
                 <input
                   type="text"
                   value={name}
@@ -195,9 +198,16 @@ export default function Home() {
                   placeholder="Full name"
                   onChange={(e) => setName(e.target.value)}
                 />
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  dateFormat="yyyy/MM/dd"
+                  className="w-full p-2 rounded-md text-black border border-blue-100"
+                  placeholderText="Date of Birth"
+                />
                 <button
                   type="submit"
-                  className="bg-blue-500 p-2 w-full mt-2 rounded-md"
+                  className="bg-blue-600 p-2 w-full mt-2 rounded-md"
                   onClick={() => {
                     if (!selfie) {
                       return setSelfieErr("Please capture selfie");
