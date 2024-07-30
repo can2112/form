@@ -51,7 +51,7 @@ export default function Home() {
     <main>
       <div className=" flex justify-center items-center h-screen">
         {screen === "mobile" && (
-          <div className=" w-[90%]  md:w-1/2 !bg-white flex flex-col md:flex-row    rounded  relative justify-between">
+          <div className=" w-[90%]  md:w-1/2 !bg-white h-[65%] flex flex-col md:flex-row    rounded  relative justify-between">
             <div className="md:w-1/2 w-full p-0">
               <Image
                 src={
@@ -63,7 +63,7 @@ export default function Home() {
                 className=" w-full h-full"
               />
             </div>
-            <div className=" flex flex-col md:w-1/2 w-full py-8 px-2 h-40   ">
+            <div className=" flex flex-col md:w-1/2 md:justify-center md:items-between w-full py-8 px-2 ">
               <input
                 placeholder="Mobile"
                 type="phone"
@@ -90,7 +90,7 @@ export default function Home() {
         )}
 
         {screen === "otp" && (
-          <div className=" w-[90%]  md:w-1/2 bg-white flex flex-col md:flex-row    rounded   justify-between">
+          <div className=" w-[90%]  md:w-1/2 bg-white h-[65%] flex flex-col md:flex-row    rounded   justify-between">
             <div className="md:w-1/2 w-full p-0">
               <Image
                 src={
@@ -127,7 +127,7 @@ export default function Home() {
         )}
 
         {screen === "personal" && (
-          <div className="w-[90%]  md:w-1/2 bg-white flex flex-col md:flex-row    rounded   justify-between">
+          <div className="w-[90%]  md:w-1/2 !bg-white h-[65%] flex flex-col md:flex-row    rounded  relative justify-between">
             <div className="md:w-1/2 w-full p-0">
               <Image
                 src={
@@ -139,22 +139,22 @@ export default function Home() {
                 className=" w-full h-full"
               />
             </div>
-            <div className="bg-white w-1/2 flex flex-col py-3 gap-4 rounded px-2">
+            <div className="bg-white w-1/2 flex flex-col py-3 gap-3 rounded px-2 h-1/2">
               {!selfie && (
                 <div>
                   <video
                     ref={videoRef}
-                    width="320"
+                    width="300"
                     height="240"
                     autoPlay
                     className="w-full"
-                  ></video>
+                  />
                   <canvas
                     ref={canvasRef}
-                    width="320"
+                    width="300"
                     height="240"
                     style={{ display: "none" }}
-                  ></canvas>
+                  />
 
                   <button
                     type="button"
@@ -168,13 +168,12 @@ export default function Home() {
               )}
 
               {selfie && (
-                <div>
+                <div className="relative">
                   <img src={selfie} alt="Selfie" className="w-full h-full" />
-                  <p className="text-red-500">{selfieErr}</p>
                 </div>
               )}
-
-              <div className=" flex flex-col w-full h-full">
+              <div className=" flex flex-col gap-3 w-full h-full relative top-0">
+                <p className="text-red-500 absolute top-24">{selfieErr}</p>
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
@@ -191,11 +190,12 @@ export default function Home() {
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500 p-2 w-full mt-4 rounded-md"
+                  className="bg-blue-500 p-2 w-full mt-2 rounded-md"
                   onClick={() => {
                     if (!selfie) {
                       return setSelfieErr("Please capture selfie");
                     }
+
                     console.log({
                       selfie: selfie,
                       name: name,
