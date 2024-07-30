@@ -1,4 +1,5 @@
 "use client";
+import nextClient from "@/utils/nextClient";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -16,6 +17,10 @@ export default function Home() {
 
   const [selfieErr, setSelfieErr] = useState("");
   const [name, setName] = useState("");
+
+  const requestOtp = (number) => {
+    nextClient.post("/request-otp", number);
+  };
 
   const startCamera = async () => {
     try {
@@ -80,6 +85,7 @@ export default function Home() {
                   if (phone.length < 10) {
                     return setMobileErr("Please enter valid number");
                   }
+                  requestOtp(phone);
                   setScreen("otp");
                 }}
               >
@@ -195,7 +201,6 @@ export default function Home() {
                     if (!selfie) {
                       return setSelfieErr("Please capture selfie");
                     }
-
                     console.log({
                       selfie: selfie,
                       name: name,
