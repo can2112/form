@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function Home() {
   const [phone, setPhone] = useState("");
-  const [screen, setScreen] = useState("mobile");
+  const [screen, setScreen] = useState("submitted");
   const [otp, setOtp] = useState(1234);
   const [mobileErr, setMobileErr] = useState("");
   const videoRef = useRef(null);
@@ -185,11 +185,19 @@ export default function Home() {
                   phone: phone,
                   otp: otp,
                 });
-                alert(selfie, name, startDate, phone, otp);
+                alert(name, startDate, phone, otp);
+                setScreen("submitted");
               }}
             >
               Submit
             </button>
+          </div>
+        )}
+
+        {screen == "submitted" && (
+          <div className="w-1/3 bg-gray-400 flex flex-col py-3 gap-4 rounded px-2">
+            <h1>Form Submitted</h1>
+            <p>Thank you, {name}! We have received your submission.</p>
           </div>
         )}
       </div>
