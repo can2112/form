@@ -60,15 +60,16 @@ export default function Home() {
             <div className="md:w-1/2 w-full p-0">
               <Image
                 src={
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
+                  "https://as1.ftcdn.net/v2/jpg/03/15/40/34/1000_F_315403482_MVo1gSOOfvwCwhLZ9hfVSB4MZuQilNrx.jpg"
                 }
                 alt="fja"
-                width={100}
-                height={100}
-                className=" w-full h-full"
+                width={700}
+                height={700}
+                className="w-full h-full"
               />
             </div>
-            <div className=" flex flex-col md:w-1/2 md:justify-center md:items-between w-full py-8 px-2 ">
+            <div className="flex flex-col md:w-1/2 md:justify-center md:items-between w-full py-1 px-2">
+            <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-black">Coffee Brewery</h1>
               <input
                 placeholder="Mobile"
                 type="phone"
@@ -76,11 +77,11 @@ export default function Home() {
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
-                className="text-black bg-gray-300 rounded px-1 py-2 "
+                className="text-black border-2 border-slate-200 rounded px-1 py-2 "
               />
               <p className="text-red-500 absolute top-16 ">{mobileErr}</p>
               <button
-                className="text-white bg-blue-500 mt-5  px-2 py-2 rounded"
+                className="text-white bg-blue-600 mt-5  px-2 py-2 rounded"
                 onClick={() => {
                   if (phone.length < 10) {
                     return setMobileErr("Please enter valid number");
@@ -89,7 +90,7 @@ export default function Home() {
                   setScreen("otp");
                 }}
               >
-                Request Otp
+                Send OTP
               </button>
             </div>
           </div>
@@ -100,7 +101,7 @@ export default function Home() {
             <div className="md:w-1/2 w-full p-0">
               <Image
                 src={
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
+                  "https://as1.ftcdn.net/v2/jpg/03/15/40/34/1000_F_315403482_MVo1gSOOfvwCwhLZ9hfVSB4MZuQilNrx.jpg"
                 }
                 alt="fja"
                 width={100}
@@ -137,7 +138,7 @@ export default function Home() {
             <div className="md:w-1/2 w-full p-0">
               <Image
                 src={
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO8AAxAr9ZNr9JCwn2QZ35rSWWuiayhh0ayQ&s"
+                  "https://as1.ftcdn.net/v2/jpg/03/15/40/34/1000_F_315403482_MVo1gSOOfvwCwhLZ9hfVSB4MZuQilNrx.jpg"
                 }
                 alt="fja"
                 width={100}
